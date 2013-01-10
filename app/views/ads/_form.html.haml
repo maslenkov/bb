@@ -1,0 +1,14 @@
+= simple_form_for(@ad) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.input :image
+    = f.input :e_mail
+    = f.input :city
+    = f.input :adress
+    = f.input :category_name
+
+  .form-actions
+    = f.button :submit

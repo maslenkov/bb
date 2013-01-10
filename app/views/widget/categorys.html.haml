@@ -1,0 +1,6 @@
+%ul 
+  %li= link_to 'all', ads_path
+  - @categories.each do |category|
+    -if category.ads.length > 0
+      %li
+        = link_to category.name,  ads_path({:category => category.id})

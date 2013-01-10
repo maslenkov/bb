@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @ad.title
+%p
+  %b Description:
+  = @ad.description
+%p
+  %b Image:
+  = image_tag @ad.image
+%p
+  %b E mail:
+  = @ad.e_mail
+%p
+  %b City:
+  = @ad.city
+%p
+  %b Adress:
+  = @ad.adress
+%p
+  %b Category:
+  = @ad.category_name
+
+= link_to 'Edit', edit_ad_path(@ad)
+\|
+= link_to 'Back', ads_path

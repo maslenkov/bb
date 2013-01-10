@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title Bb
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    /отображение "всплывающих сообщений от devise(из мануала по установке)
+    %p(class = "notice")
+      = notice
+    %p(class = "alert")
+      = alert
+    = yield
+    %div
+      -unless user_signed_in?
+        =link_to 'Sign up', new_user_registration_path
+        =link_to 'Sign in', new_user_session_path
+      -else
+        =current_user.email.sub(/@.*$/, '').capitalize
+        =link_to 'My ads', ads_path({:user => current_user.id})
+        =link_to 'Sign out', destroy_user_session_path, :method => :delete
+      #widget
