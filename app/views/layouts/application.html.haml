@@ -6,18 +6,28 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    /отображение "всплывающих сообщений от devise(из мануала по установке)
-    %p(class = "notice")
-      = notice
-    %p(class = "alert")
-      = alert
-    = yield
-    %div
-      -unless user_signed_in?
-        =link_to 'Sign up', new_user_registration_path
-        =link_to 'Sign in', new_user_session_path
-      -else
-        =current_user.email.sub(/@.*$/, '').capitalize
-        =link_to 'My ads', ads_path({:user => current_user.id})
-        =link_to 'Sign out', destroy_user_session_path, :method => :delete
-      #widget
+    %div{:class => 'container'}
+      %div{:class => 'row-fluid'}
+        %div{:class => 'span8'}
+          /отображение "всплывающих сообщений от devise(из мануала по установке)
+          /отключенно, т.к. в бутстрапе тоже есть такие имена классов
+          -#%p(class = "notice")
+            -#= notice
+          -#%p(class = "alert")
+            -#= alert
+          = yield
+        %div{:class => 'span2 offset2'}
+          %ul{:class => 'nav nav-tabs nav-stacked'}
+            -unless user_signed_in?
+              %li
+                %h5 Welcome to BB
+              %li=link_to 'Sign up', new_user_registration_path
+              %li=link_to 'Sign in', new_user_session_path
+            -else
+              %li
+                %h5=current_user.email.sub(/@.*$/, '').capitalize
+              %li=link_to 'Sign out', destroy_user_session_path, :method => :delete
+              %li=link_to 'My ads', ads_path({:user => current_user.id})
+              %li= link_to 'New Ad', new_ad_path
+
+          #widget

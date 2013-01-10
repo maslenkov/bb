@@ -1,36 +1,24 @@
 %h1 Bulletin board
 
-%table
-  %tr
-    %th Title
-    %th Description
-    %th Image
-    %th E mail
-    %th City
-    %th Adress
-    %th Category
-    %th
-    %th
-    %th
-
+%table{:class=>"table table-hover"}
   - @ads.each do |ad|
     %tr
-      %td= ad.title
-      %td= ad.description
       %td= image_tag ad.image, :class => 'ad-preview'
-      %td= ad.e_mail
-      %td= ad.city
-      %td= ad.adress
-      %td= link_to ad.category_name, ads_path({:category => ad.category_id})
-      %td= link_to 'Show', ad
-      -if user_signed_in?
-        %td= link_to 'Edit', edit_ad_path(ad)
-        %td= link_to 'Destroy', ad, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.id === 1
-      -else
-        %td
-        %td
-
-%br
-
-- if user_signed_in?
-  = link_to 'New Ad', new_ad_path
+      %td
+        %h5= ad.title
+        %div{:class => 'row'}
+          %div{:class => 'span6 offset1'}
+            = ad.description
+            %br
+            Category:
+            = link_to ad.category_name, ads_path({:category => ad.category_id})
+            %br
+            = link_to 'Show', ad
+            -if user_signed_in?
+              = link_to 'Edit', edit_ad_path(ad) if current_user.id === ad.user_id or current_user.id === 1
+              = link_to 'Destroy', ad, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.id === 1
+          %div{:class => 'span5'}
+            = ad.e_mail
+            %br
+            = ad.city
+            = ad.adress

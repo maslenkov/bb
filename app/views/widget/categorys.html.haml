@@ -1,4 +1,6 @@
-%ul 
+%h5 Categories
+%ul{:class => 'nav nav-tabs nav-stacked'}
+  -#{:class => 'unstyled'}
   %li= link_to 'all', ads_path
   - @categories.each do |category|
     -if category.ads.length > 0
